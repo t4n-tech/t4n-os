@@ -2,8 +2,6 @@
 
 **T4n OS** adalah distribusi Linux berbasis **Void Linux**.
 
-Ini **eksperimen bocah Atjeh** sekaligus upaya **memperkenalkan Void Linux** ke ranah server dan desktop.
-
 ## 🎯 Tujuan
 
 - Menjadi OS:
@@ -19,6 +17,13 @@ Ini **eksperimen bocah Atjeh** sekaligus upaya **memperkenalkan Void Linux** ke 
   - General Desktop (*on going*) 
   - Workstation (*on going*) 
   - Gaming (*on going*)
+- Variant
+  - Base
+  - Server
+  - XFCE4
+  - BSPWM
+  - KDE
+  - RiverWm
  
 ## 🧠 Filosofi
 - Simpel
