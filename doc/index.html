@@ -4,26 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dokumentasi T4n OS</title>
+    
+    <!-- Google Fonts Luxury -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <img src="assets/images/t4n-os.svg" alt="T4n OS">
+            <div class="preloader-text">Loading Docs...</div>
+        </div>
+    </div>
+
+    <!-- Header -->
     <header>
         <div class="logo">
             <i class="fas fa-terminal"></i>
             <span>T4n OS Documentation</span>
         </div>
-        <button class="theme-toggle" id="theme-toggle">
-            <i class="fas fa-moon" id="theme-icon"></i>
-        </button>
+        <!-- TOMBOL THEME DIHAPUS -->
     </header>
 
+    <!-- Sidebar Toggle (Mobile) -->
     <button class="sidebar-toggle" id="sidebar-toggle">
         <i class="fas fa-bars"></i>
     </button>
 
+    <!-- Overlay (Mobile) -->
     <div class="overlay" id="overlay"></div>
 
+    <!-- Sidebar Navigation -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h2>T4n OS</h2>
@@ -36,12 +56,12 @@
                         <a href="#"><i class="fas fa-info-circle"></i> 1. About</a>
                     </div>
                     <div class="nested-nav" id="about-nav">
-                        <a href="../doc/page/main001.html"><i class="fas fa-history"></i> 1.1 History</a>
+                        <a href="page/main001.html"><i class="fas fa-history"></i> 1.1 History</a>
                     </div>
                 </li>
                 <li>
                     <div class="nav-toggle" id="installation-toggle">
-                        <a href="../doc/page/main002.html"><i class="fas fa-download"></i> 2. Installation</a>
+                        <a href="#"><i class="fas fa-download"></i> 2. Installation</a>
                     </div>
                     <div class="nested-nav" id="installation-nav">
                         <div class="nav-toggle" id="live-installer-toggle">
@@ -224,7 +244,6 @@
                 <li>
                     <div class="nav-toggle" id="other-toggle">
                         <a href="#"><i class="fas fa-ellipsis-h"></i> 5. Other</a>
-
                     </div>
                     <div class="nested-nav" id="other-nav">
                         <div class="nav-toggle" id="layer-toggle">
@@ -287,9 +306,11 @@ T4n OS memberi default yang masuk akal, tapi keputusan akhir tetap di tangan use
                 </ul>
             </div>
 
-            <a href="../doc/page/main001.html">Next Page </a><i class="fa-solid fa-chevron-right"></i>
+            <a href="page/main001.html" class="btn">Next Page <i class="fa-solid fa-chevron-right"></i></a>
 
         </section>
+    </main>
+
     <script src="assets/main.js"></script>
 </body>
 </html>

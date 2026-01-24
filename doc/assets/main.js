@@ -1,11 +1,6 @@
 /* =========================
    GLOBAL ELEMENTS
 ========================= */
-const html = document.documentElement;
-
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon   = document.getElementById('theme-icon');
-
 const sidebarToggle = document.getElementById('sidebar-toggle');
 const sidebar       = document.getElementById('sidebar');
 const overlay       = document.getElementById('overlay');
@@ -13,40 +8,32 @@ const overlay       = document.getElementById('overlay');
 const navToggles = document.querySelectorAll('.nav-toggle');
 const navLinks   = document.querySelectorAll('.sidebar-nav a');
 
-
 /* =========================
-   THEME MANAGER
+   PRELOADER MANAGER
 ========================= */
-class ThemeManager {
+class PreloaderManager {
     constructor() {
-        this.theme = localStorage.getItem('theme') || 'dark';
-        this.apply();
-        this.bind();
+        this.init();
     }
 
-    apply() {
-        html.setAttribute('data-theme', this.theme);
-        localStorage.setItem('theme', this.theme);
-
-        if (themeIcon) {
-            themeIcon.className =
-                this.theme === 'light'
-                    ? 'fas fa-sun'
-                    : 'fas fa-moon';
-        }
-    }
-
-    toggle() {
-        this.theme = this.theme === 'dark' ? 'light' : 'dark';
-        this.apply();
-    }
-
-    bind() {
-        if (!themeToggle) return;
-        themeToggle.addEventListener('click', () => this.toggle());
+    init() {
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 800);
+                }, 1000);
+            }
+        });
     }
 }
 
+/* =========================
+   THEME MANAGER (DIHAPUS)
+========================= */
 
 /* =========================
    SIDEBAR MANAGER
@@ -97,7 +84,6 @@ class SidebarManager {
     }
 }
 
-
 /* =========================
    NAVIGATION (MULTI-PAGE SAFE)
 ========================= */
@@ -108,23 +94,26 @@ class NavigationManager {
         this.markActiveLink();
     }
 
-    /* Expand / collapse nested menu */
     bindToggles() {
         navToggles.forEach(toggle => {
             toggle.addEventListener('click', e => {
-                // JANGAN ganggu <a>
-                if (e.target.tagName === 'A') return;
+                if (e.target.tagName === 'A' && e.target.getAttribute('href') !== '#') return;
+                if (e.target.closest('a') && e.target.closest('a').getAttribute('href') !== '#') return;
 
                 const parent = toggle.parentElement;
                 const nested = parent.querySelector('.nested-nav');
                 if (!nested) return;
+
+                const isActive = nested.classList.contains('active');
+                
+                // Optional: Accordion style (uncomment if needed)
+                // parent.parentElement.querySelectorAll('.nested-nav').forEach(n => n.classList.remove('active'));
 
                 nested.classList.toggle('active');
             });
         });
     }
 
-    /* Highlight active page */
     markActiveLink() {
         const currentPath = location.pathname.split('/').pop();
 
@@ -147,7 +136,6 @@ class NavigationManager {
     }
 }
 
-
 /* =========================
    CODE COPY (OPTIONAL)
 ========================= */
@@ -164,14 +152,16 @@ class CodeCopyManager {
             const btn = document.createElement('button');
             btn.className = 'copy-button';
             btn.innerHTML = '<i class="fas fa-copy"></i>';
+            btn.style.cssText = `
+                position: absolute; top: 10px; right: 10px;
+                background: rgba(212, 175, 55, 0.2); color: var(--primary-gold);
+                border:1px solid var(--primary-gold); border-radius: 4px;
+                padding: 5px 10px; cursor: pointer; z-index: 10;
+                font-size: 0.8rem; transition: all 0.3s ease;
+            `;
 
-            Object.assign(btn.style, {
-                position: 'absolute',
-                top: '10px',
-                right: '10px',
-                cursor: 'pointer',
-                zIndex: 10
-            });
+            btn.onmouseenter = () => { btn.style.background = 'var(--primary-gold)'; btn.style.color = '#000'; };
+            btn.onmouseleave = () => { btn.style.background = 'rgba(212, 175, 55, 0.2)'; btn.style.color = 'var(--primary-gold)'; };
 
             btn.onclick = async () => {
                 try {
@@ -191,21 +181,18 @@ class CodeCopyManager {
     }
 }
 
-
 /* =========================
    INIT
 ========================= */
 document.addEventListener('DOMContentLoaded', () => {
-    const themeManager   = new ThemeManager();
-    const sidebarManager = new SidebarManager();
-    const navManager     = new NavigationManager(sidebarManager);
-    const copyManager    = new CodeCopyManager();
+    const preloaderManager = new PreloaderManager();
+    const sidebarManager   = new SidebarManager();
+    const navManager       = new NavigationManager(sidebarManager);
+    const copyManager      = new CodeCopyManager();
 
     window.app = {
-        themeManager,
         sidebarManager,
         navManager,
         copyManager
     };
 });
-

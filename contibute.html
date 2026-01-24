@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontribusi - T4n OS</title>
+    <meta name="description" content="Bergabunglah dan berkontribusi pada pengembangan T4n OS.">
+    <link rel="icon" href="assets/images/t4n-os.svg" type="image/svg+xml">      
+
+    <!-- Google Fonts untuk Gaya Luxury -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           CSS Custom Properties (Luxury Theme)
+           ========================================================================== */
+        :root {
+            --primary-gold: #d4af37;
+            --primary-gold-hover: #b5952f;
+            --secondary-gold: #f3e5ab;
+            
+            --dark-bg: #050505;
+            --dark-card: rgba(20, 20, 30, 0.7);
+            --dark-surface: #0f111a;
+            
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            
+            --accent-glow: rgba(212, 175, 55, 0.15);
+            --glass-border: rgba(212, 175, 55, 0.2);
+            
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 4px;
+        }
+
+        /* ==========================================================================
+           Global Styles
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(30, 40, 60, 0.4) 0%, transparent 40%);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--secondary-gold), var(--primary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px var(--accent-glow);
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--primary-gold);
+        }
+
+        /* ==========================================================================
+           PRELOADER STYLES (Ditambahkan)
+           ========================================================================== */
+        @keyframes pulse-luxury {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .preloader-content img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 30px;
+            animation: pulse-luxury 2s infinite;
+            filter: drop-shadow(0 0 10px var(--primary-gold));
+        }
+
+        .preloader-text {
+            color: var(--primary-gold);
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* ==========================================================================
+           Header & Navigation
+           ========================================================================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: var(--transition);
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            display: block;
+            margin-right: 12px;
+            filter: drop-shadow(0 0 5px var(--primary-gold));
+        }
+
+        .logo p {
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-gold);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           Buttons
+           ========================================================================== */
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--primary-gold);
+            padding: 12px 35px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin: 10px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--primary-gold);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--primary-gold);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ==========================================================================
+           Page Hero
+           ========================================================================== */
+        .page-hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+            margin-bottom: 60px;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ==========================================================================
+           Sections & Cards
+           ========================================================================== */
+        .section {
+            margin-bottom: 100px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-gold);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--dark-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .card:hover {
+            border-color: var(--primary-gold);
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .card ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .card ul li::before {
+            content: '•';
+            color: var(--primary-gold);
+            position: absolute;
+            left: 0;
+        }
+
+        /* ==========================================================================
+           Special T4n-Maker Section
+           ========================================================================== */
+        .t4n-maker-box {
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.05), rgba(20, 20, 30, 0.8));
+            border: 1px solid var(--glass-border);
+            padding: 50px;
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .t4n-maker-box::after {
+            content: 'CORE';
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-size: 8rem;
+            font-family: 'Cinzel', serif;
+            color: rgba(255, 255, 255, 0.02);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .badge-license {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .repo-link {
+            font-family: 'Fira Code', monospace;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--secondary-gold);
+            display: block;
+            margin: 20px 0;
+            width: 100%;
+            word-break: break-all;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .repo-link:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--primary-gold);
+            padding-left: 20px;
+        }
+
+        /* ==========================================================================
+           Timeline / Workflow
+           ========================================================================== */
+        .workflow-step {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            min-width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--primary-gold);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.05);
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--text-main);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .step-content p {
+            color: var(--text-muted);
+        }
+
+        .code-block {
+            background: #0d0d0d;
+            padding: 20px;
+            border-radius: 4px;
+            border-left: 3px solid var(--primary-gold);
+            font-family: 'Fira Code', monospace;
+            color: #a5b3ce;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        /* ==========================================================================
+           Footer
+           ========================================================================== */
+        footer {
+            background-color: #020202;
+            padding: 60px 0 30px;
+            margin-top: 100px;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .footer-logo p {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Simplified for this subpage */
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .page-hero h1 { font-size: 2rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .t4n-maker-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER (DITAMBAHKAN) -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <img src="assets/images/t4n-os.svg" alt="T4n OS">
+            <div class="preloader-text">Loading Experience...</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/t4n-os.svg" alt="T4n OS">
+                <p>T4n OS</p>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="active">Contribute</a></li>
+            </ul>
+            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Cara <span class="text-gradient">Kontribusi</span></h1>
+            <p>T4n OS dibangun oleh komunitas, untuk komunitas. Bergabunglah dalam evolusi Void Linux dan bantu kami menciptakan distribusi Linux yang sempurna.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        
+        <!-- T4n-Maker Highlight Section -->
+        <section class="section">
+            <div class="t4n-maker-box">
+                <span class="badge-license"><i class="fas fa-balance-scale"></i> License Like Void Linux</span>
+                <h2>Inti Pembangunan: <span class="text-gradient">T4n-Maker</span></h2>
+                <p style="margin: 15px 0; color: var(--text-muted);">
+                    Untuk membangun dan mengkustomisasi ISO T4n OS, kami menggunakan alat khusus bernama <strong>T4n-Maker</strong>. Ini adalah fork dari proyek <strong>void-mklive</strong>, disesuaikan untuk kebutuhan spesifik T4n OS.
+                </p>
+                
+                <a href="https://github.com/t4n-company/t4n-maker" target="_blank" class="repo-link">
+                    <i class="fab fa-github"></i> https://github.com/t4n-company/t4n-maker
+                </a>
+
+                <div style="margin-top: 30px;">
+                    <h4 style="color: var(--text-main); margin-bottom: 10px;">Detail Teknis:</h4>
+                    <ul class="card" style="padding: 20px; margin-top: 0; background: rgba(0,0,0,0.2);">
+                        <li><strong>Forked From:</strong> <a href="https://github.com/void-linux/void-mklive" style="color: var(--primary-gold);">void-linux/void-mklive</a></li>
+                        <li><strong>Lisensi:</strong> Mengikuti standar lisensi Void Linux (Open Source).</li>
+                        <li><strong>Fungsi:</strong> Script pembuat Live ISO yang bisa dikustomisasi untuk varian BASE, Server, XFCE4, maupun KDE.</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <a href="https://github.com/t4n-company/t4n-maker" target="_blank" class="btn">Fork T4n-Maker</a>
+                    <a href="https://github.com/void-linux/void-mklive" target="_blank" class="btn" style="border-color: var(--text-muted); color: var(--text-muted);">Lihat void-mklive</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contribution Areas -->
+        <section class="section">
+            <h2 class="section-title">Area Kontribusi</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3>Pengembangan Kode</h3>
+                    <p>Bantu memperbaiki bug, menambah fitur baru ke <strong>T4n-Maker</strong>, atau mengoptimalkan script sistem.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-box-open"></i></div>
+                    <h3>Pengemasan (Packaging)</h3>
+                    <p>Bantu kami mengemas aplikasi yang belum ada di repositori Void Linux atau VUR.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-language"></i></div>
+                    <h3>Terjemahan & Docs</h3>
+                    <p>Perbaiki dokumentasi, terjemahkan panduan penggunaan ke berbagai bahasa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow / Steps -->
+        <section class="section">
+            <h2 class="section-title">Alur Kerja (Workflow)</h2>
+            <div class="card">
+                
+                <!-- Step 1 -->
+                <div class="workflow-step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4>Fork Repository</h4>
+                        <p>Mulai dengan melakukan fork repository <strong>T4n-Maker</strong> atau repository T4n OS utama ke akun GitHub Anda.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="workflow-step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4>Clone & Buat Branch</h4>
+                        <p>Clone fork Anda ke lokal dan buat branch baru untuk fitur atau perbaikan Anda.</p>
+                        <div class="code-block">
+                            git clone https://github.com/USERNAME/t4n-maker.git<br>
+                            cd t4n-maker<br>
+                            git checkout -b fitur-baru-saya
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="workflow-step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h4>Lakukan Perubahan & Test</h4>
+                        <p>Lakukan perubahan kode, pastikan build ISO berjalan lancar dengan T4n-Maker, dan lakukan testing.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="workflow-step">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h4>Pull Request (PR)</h4>
+                        <p>Push branch Anda ke GitHub dan buat Pull Request ke repository utama kami. Jelaskan perubahan Anda dengan jelas.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Guidelines -->
+        <section class="section">
+            <h2 class="section-title">Panduan Komunitas</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-gavel" style="color:var(--primary-gold); margin-right: 10px;"></i> Code of Conduct</h3>
+                    <p>Kami mengharapkan semua kontributor untuk saling menghargai. Hindari komentar yang menyinggung, diskusi yang toxic, atau perilaku yang merugikan komunitas lain.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-file-contract" style="color:var(--primary-gold); margin-right: 10px;"></i> Lisensi</h3>
+                    <p>Seluruh kontribusi yang Anda berikan ke proyek T4n OS dan T4n-Maker akan dilisensikan di bawah lisensi yang sama dengan Void Linux (open source).</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="./index.html" class="footer-logo">
+                <img src="assets/images/t4n-os.svg" alt="T4n OS">
+                <p>T4n OS</p>
+            </a>
+            <div class="social-links" style="margin-top: 20px;">
+                <a href="https://github.com/t4n-company" target="_blank" style="color: var(--text-muted); margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-github"></i></a>
+                <a href="https://discord.gg/gqX8XsCpfs" target="_blank" style="color: var(--text-muted); margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-discord"></i></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 T4n OS. Project Community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // PRELOADER LOGIC (DITAMBAHKAN)
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 800); // Sesuaikan dengan durasi CSS transition
+                }, 1500); // Durasi tampil preloader
+            }
+        });
+
+        // Simple Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', () => {
+            const isActive = navLinks.style.display === 'flex';
+            
+            if (isActive) {
+                navLinks.style.display = 'none';
+                body.style.overflow = '';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '80px';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.background = 'rgba(5,5,5,0.95)';
+                navLinks.style.padding = '20px';
+                navLinks.style.borderBottom = '1px solid var(--primary-gold)';
+                body.style.overflow = 'hidden';
+            }
+        });
+    </script>
+</body>
+</html>

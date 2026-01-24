@@ -3,18 +3,1278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T4n OS</title>
-    <meta name="description" content="T4n OS adalah distribusi Linux berbasis Void Linux dengan repositori VUR (Void User Repository) yang dirancang untuk power user dan pengguna umum.">
+    <title>T4n OS | The New Era</title>
+    <meta name="description" content="T4n OS adalah sistem operasi berbasis Void Linux yang dirancang untuk memberikan pengalaman penggunaan yang mudah, ringan, dan stabil.">
+    <link rel="icon" href="assets/images/t4n-os.svg" type="image/svg+xml">    
+
+    <!-- Google Fonts untuk Gaya Luxury -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/style.css">
-    <link rel="icon" href="assets/images/t4n-os.svg" type="image/svg+xml">
+    
+    <style>
+        /* ==========================================================================
+           CSS Custom Properties (Luxury Theme Variables)
+           ========================================================================== */
+        :root {
+            /* Palette Luxury: Gold & Deep Blue */
+            --primary-gold: #d4af37;
+            --primary-gold-hover: #b5952f;
+            --secondary-gold: #f3e5ab;
+            
+            --dark-bg: #050505;
+            --dark-card: rgba(20, 20, 30, 0.7);
+            --dark-surface: #0f111a;
+            
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            
+            --accent-glow: rgba(212, 175, 55, 0.15);
+            --glass-border: rgba(212, 175, 55, 0.2);
+            
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 4px;
+        }
+
+        /* ==========================================================================
+           Global Styles & Resets
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(30, 40, 60, 0.4) 0%, transparent 40%);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Utility Text Gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--secondary-gold), var(--primary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px var(--accent-glow);
+        }
+
+        /* ==========================================================================
+           Animations
+           ========================================================================== */
+        @keyframes pulse-luxury {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           Preloader
+           ========================================================================== */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .preloader-content img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 30px;
+            animation: pulse-luxury 2s infinite;
+            filter: drop-shadow(0 0 10px var(--primary-gold));
+        }
+
+        .preloader-text {
+            color: var(--primary-gold);
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* ==========================================================================
+           Header & Navigation (Glassmorphism)
+           ========================================================================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: var(--transition);
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            display: block;
+            margin-right: 12px;
+            filter: drop-shadow(0 0 5px var(--primary-gold));
+        }
+
+        .logo p {
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        /* Efek Garis Bawah Emas */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-gold);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           Buttons (Luxury Style)
+           ========================================================================== */
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--primary-gold);
+            padding: 12px 35px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin: 10px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--primary-gold);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--primary-gold);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--text-muted);
+            color: var(--text-muted);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+        
+        .btn-outline::before {
+            background-color: transparent;
+        }
+
+        .btn-small {
+            padding: 8px 20px;
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+            margin: 0;
+        }
+
+        .btn-disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            border-color: var(--text-muted);
+            color: var(--text-muted);
+        }
+        
+        .btn-disabled:hover {
+            background: transparent;
+            color: var(--text-muted);
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* ==========================================================================
+           Hero Section
+           ========================================================================== */
+        .hero {
+            padding: 120px 0 100px;
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.8), rgba(5, 5, 5, 1));
+            z-index: -1;
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            color: var(--text-main);
+        }
+        
+        .hero h1 span {
+            color: var(--primary-gold);
+        }
+
+        /* Styling khusus untuk teks baru "Welcome To NEW ERA..." */
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-left: 3px solid var(--primary-gold);
+            padding-left: 20px;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            margin-bottom: 50px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-item {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            font-family: 'Cinzel', serif;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .hero-image {
+            flex: 1;
+            max-width: 550px;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--glass-border);
+            z-index: -1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* ==========================================================================
+           Main Content & Sections
+           ========================================================================== */
+        main {
+            padding: 40px 0;
+        }
+
+        .section {
+            margin-bottom: 120px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title span {
+            border-bottom: 2px solid var(--primary-gold);
+            padding-bottom: 10px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        .about-image {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            filter: grayscale(20%) sepia(10%);
+            transition: var(--transition);
+        }
+        
+        .about-image:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* ==========================================================================
+           Standard Card Component (Glassmorphism)
+           ========================================================================== */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background-color: var(--dark-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-gold);
+        }
+
+        .card-icon i {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+        }
+
+        .card h3 {
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card p {
+            margin-bottom: 20px;
+            flex-grow: 1;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .card-link:hover {
+            color: var(--text-main);
+            letter-spacing: 2px;
+        }
+
+        .card-link i {
+            margin-left: 8px;
+        }
+
+        /* ==========================================================================
+           Download Card Component
+           ========================================================================== */
+        .download-content {
+            margin-top: 50px;
+        }
+
+        .download-info {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .download-info h3 {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+        }
+
+        .download-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .download-card {
+            background-color: var(--dark-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .download-card:hover {
+            border-color: var(--primary-gold);
+        }
+
+        .download-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .download-header h4 {
+            margin: 0;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            font-family: 'Cinzel', serif;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .download-size {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .download-body {
+            flex-grow: 1;
+        }
+
+        .download-body p {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .download-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .download-features li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        
+        .download-features li i {
+            margin-top: 4px; /* Align icon with top of text */
+        }
+
+        .download-features i {
+            color: var(--primary-gold);
+            margin-right: 12px;
+            font-size: 0.8rem;
+            min-width: 15px;
+        }
+
+        .download-footer {
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        /* ==========================================================================
+           Status Badges
+           ========================================================================== */
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 2px;
+            font-size: 0.6rem;
+            font-weight: bold;
+            margin-left: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            vertical-align: middle;
+        }
+
+        .status-fixed { background-color: rgba(76, 175, 80, 0.2); color: #4caf50; border: 1px solid #4caf50; }
+        .status-bug { background-color: rgba(244, 67, 54, 0.2); color: #f44336; border: 1px solid #f44336; }
+        .status-new { 
+            background-color: rgba(212, 175, 55, 0.2); 
+            color: var(--primary-gold); 
+            border: 1px solid var(--primary-gold);
+            animation: pulse-luxury 2s infinite;
+        }
+
+        /* ==========================================================================
+           Gallery Section
+           ========================================================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            height: 280px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-gold);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            filter: grayscale(30%);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(5,5,5, 0.95), transparent);
+            padding: 30px 20px 20px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            color: var(--primary-gold);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .gallery-overlay p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* ==========================================================================
+           Lightbox
+           ========================================================================== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            border: 1px solid var(--primary-gold);
+            padding: 5px; /* Frame effect */
+        }
+
+        .lightbox-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: var(--text-main);
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary-gold);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 40px;
+        }
+
+        .lightbox-prev, .lightbox-next {
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-main);
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+
+        .lightbox-prev:hover, .lightbox-next:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* ==========================================================================
+           Modal
+           ========================================================================== */
+        .download-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .download-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--dark-surface);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+
+        .modal-title {
+            color: var(--primary-gold);
+            font-size: 1.8rem;
+            margin: 0;
+            font-family: 'Cinzel', serif;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--text-main);
+        }
+
+        .modal-download-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .download-option {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid transparent;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .download-option:hover {
+            background-color: rgba(212, 175, 55, 0.05);
+            border-color: var(--primary-gold);
+            transform: translateX(5px);
+        }
+
+        .download-option i {
+            font-size: 1.8rem;
+            margin-right: 20px;
+            color: var(--primary-gold);
+        }
+        
+        .download-info h3 {
+            margin: 0 0 5px 0;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        .download-info p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           Footer
+           ========================================================================== */
+        footer {
+            background-color: #020202;
+            padding: 80px 0 30px;
+            margin-top: 100px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+            gap: 50px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 15px;
+            filter: drop-shadow(0 0 5px var(--primary-gold));
+        }
+
+        .footer-logo h3 {
+            color: var(--text-main);
+            margin: 0;
+            font-size: 1.5rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-gold);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .footer-section p {
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-gold);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-right: 15px;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-gold);
+            color: var(--dark-bg);
+            border-color: var(--primary-gold);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .copyright i {
+            color: var(--primary-gold);
+            margin: 0 5px;
+        }
+
+        /* ==========================================================================
+           Back to Top Button
+           ========================================================================== */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--dark-surface);
+            color: var(--primary-gold);
+            border: 1px solid var(--primary-gold);
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ==========================================================================
+           Responsive Design
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .hero .container {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 50px;
+            }
+            
+            .hero-content {
+                text-align: center;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text, 
+            .about-image {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                z-index: 101;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--dark-surface);
+                border-right: 1px solid var(--glass-border);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 40px;
+                transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+                width: 100%;
+            }
+            
+            .nav-links a {
+                font-size: 1.1rem;
+                display: block;
+                padding: 10px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 15px;
+            }
+            
+            .lightbox-nav {
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+            
+            .card-container,
+            .download-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Preloader -->
     <div class="preloader">
         <div class="preloader-content">
             <img src="assets/images/t4n-os.svg" alt="T4n OS">
-            <div class="preloader-text">Loading...</div>
+            <div class="preloader-text">Loading Experience...</div>
         </div>
     </div>
 
@@ -29,12 +1289,12 @@
             </a>
 
             <ul class="nav-links">
-                <li><a href="#home" class="btn btn-small">Home</a></li>
-                <li><a href="#about" class="btn btn-small">About</a></li>
-                <li><a href="#features" class="btn btn-small">Features</a></li>
-                <li><a href="#gallery" class="btn btn-small">Gallery</a></li>
-                <li><a href="#info" class="btn btn-small">Information</a></li>
-                <li><a href="#download" class="btn btn-small">Download</a></li>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#info">Info</a></li>
+                <li><a href="#download">Download</a></li>
             </ul>
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars"></i>
@@ -47,20 +1307,29 @@
         <div class="hero-bg"></div>
         <div class="container">
             <div class="hero-content">
-                <h1>T4n OS</h1>
-                <p>Sistem Operasi berbasis Void Linux dengan repositori VUR.</p>
+                <h1>T4n<span class="text-gradient"> OS</span></h1>
+                <!-- TEKS BARU DITAMBAHKAN DISINI -->
+                <div class="hero-subtitle">Welcome To NEW ERA for VOID LINUX</div>
+                
+                <p>Evolusi sistem operasi Void Linux dengan integrasi VUR. Dirancang untuk performa absolut, estetika, dan kontrol penuh.</p>
+                
                 <div class="hero-buttons">
                     <a href="#download" class="btn">Get Started</a>
                     <a href="https://github.com/t4n-company/t4n-os" class="btn btn-outline" target="_blank">v.0.1.0</a>
                 </div>
+                
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <div class="stat-number">Rolling</div>
-                        <div class="stat-label">Release Model</div>
+                        <span class="stat-number">Rolling</span>
+                        <span class="stat-label">Release Model</span>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">XBPS</div>
-                        <div class="stat-label">Package Manager</div>
+                        <span class="stat-number">XBPS</span>
+                        <span class="stat-label">Package Manager</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">LET</span>
+                        <span class="stat-label">VUR-Helper</span>
                     </div>
                 </div>
             </div>
@@ -74,95 +1343,95 @@
     <main class="container">
         <!-- About Section -->
         <section id="about" class="section">
-            <h2 class="section-title">Tentang T4n OS</h2>
+            <h2 class="section-title"><span>Tentang T4n OS</span></h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>T4n OS adalah Distribusi Linux yang berbasis Void Linux. Sistem ini dirancang untuk pengguna yang menginginkan kontrol penuh (Power User) dan pengguna umum untuk keperluan: Browsing, Office, Content Creator, Editor, Programmer dan Server.</p>
-                    <p>Dengan integrasi VUR (Void User Repository), T4n OS menyediakan akses ke ribuan paket tambahan yang tidak tersedia di repository resmi Void Linux, memberikan fleksibilitas maksimal untuk pengguna.</p>
+                    <p>T4n OS adalah sistem operasi berbasis Void Linux yang dirancang untuk semua pengguna, dari pemula hingga pengguna berpengalaman. Mengutamakan kemudahan penggunaan, T4n OS menawarkan performa ringan, stabil, dan efisien untuk kebutuhan harian maupun pengembangan.</p>
+                    <p>Dikembangkan di Indonesia, Atjeh. T4n OS membawa semangat open-source dan kemandirian teknologi, serta T4n OS membuka gerbang akses ke ribuan paket tambahan dengan VUR(Void User Repository).</p>
                     <a href="https://github.com/t4n-company/t4n-os" class="card-link" target="_blank">
-                        Kunjungi GitHub <i class="fas fa-arrow-right"></i>
+                        Jelajahi GitHub <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Void Linux Terminal">
+                    <img src="https://wallpapersok.com/images/high/original-void-linux-logo-b1191jmjhcfjapwc.webp" alt="Void Linux Terminal">
                 </div>
             </div>
         </section>
 
         <!-- Features Section -->
         <section id="features" class="section">
-            <h2 class="section-title">Fitur Unggulan</h2>
+            <h2 class="section-title"><span>Fitur Unggulan</span></h2>
             <div class="card-container">
                 <div class="card">
                     <div class="card-icon">
                         <i class="fas fa-rocket"></i>
                     </div>
                     <h3>VUR Integration <span class="status-badge status-new">COMING SOON</span></h3>
-                    <p>Integrasi penuh dengan Void User Repository (VUR) yang menyediakan akses ke ribuan paket tambahan yang tidak tersedia di repository resmi Void Linux.</p>
+                    <p>Integrasi penuh dengan Void User Repository (VUR) yang menyediakan akses instan ke ribuan paket tambahan eksklusif.</p>
                 </div>
                 
                 <div class="card">
                     <div class="card-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <h3>Custom Init System <span class="status-badge status-new">COMING SOON</span></h3>
-                    <p>Sistem init runit yang dikustomisasi untuk booting ultra-cepat dan manajemen layanan yang efisien, serta opsi untuk menggunakan SystemD.</p>
+                    <h3>Custom Init <span class="status-badge status-new">COMING SOON</span></h3>
+                    <p>Sistem init runit yang dikustomisasi untuk booting ultra-cepat, efisiensi memori, dan opsi SystemD untuk kebutuhan enterprise.</p>
                 </div>
                 
                 <div class="card">
                     <div class="card-icon">
-                        <i class="fas fa-palette"></i>
+                        <i class="fas fa-brain"></i>
                     </div>
-                    <h3>Kustomisasi Maksimal</h3>
-                    <p>Desktop environment yang dapat disesuaikan sepenuhnya dengan pilihan Window Manager modern seperti BSPWM & River, atau Desktop Environment lengkap seperti XFCE4 & KDE.</p>
+                    <h3>AI-T4n SLM <span class="status-badge status-new">COMING SOON</span></h3>
+                    <p>Integrated Small Large Model (SLM) berbasis AI yang berjalan lokal untuk optimasi workflow dan asisten coding.</p>
                 </div>
             </div>
         </section>
 
         <!-- Gallery Section -->
         <section id="gallery" class="section">
-            <h2 class="section-title">Galeri</h2>
+            <h2 class="section-title"><span>Galeri</span></h2>
             <div class="gallery-grid">
-                <div class="gallery-item" data-title="T4n OS Desktop" data-caption="Tampilan desktop T4n OS dengan environment yang bersih dan modern">
-                    <img src="assets/images/T4nos.jpg" alt="T4n OS Desktop">
+                <div class="gallery-item" data-title="T4n OS Desktop" data-caption="Tampilan desktop T4n OS yang bersih dan elegan">
+                    <img src="assets/images/T4nos.png" alt="T4n OS Desktop">
                     <div class="gallery-overlay">
                         <h3>T4n OS Desktop</h3>
-                        <p>Desktop environment yang bersih dan modern</p>
+                        <p>Modern Environment</p>
                     </div>
                 </div>
-                <div class="gallery-item" data-title="Void Linux Terminal" data-caption="Terminal Void Linux dengan tampilan yang powerful">
-                    <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Void Linux Terminal">
+                <div class="gallery-item" data-title="T4n OS Terminal" data-caption="Kekuatan penuh terminal T4n OS">
+                    <img src="https://wallpapersok.com/images/high/original-void-linux-logo-b1191jmjhcfjapwc.webp" alt="T4n OS Terminal">
                     <div class="gallery-overlay">
-                        <h3>Terminal Void Linux</h3>
-                        <p>Powerful terminal untuk pengguna advanced</p>
+                        <h3>Terminal Core</h3>
+                        <p>Power User Experience</p>
                     </div>
                 </div>
-                <div class="gallery-item" data-title="Void Linux Setup" data-caption="Proses instalasi Void Linux yang mudah">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Void Linux Setup">
+                <div class="gallery-item" data-title="T4n OS Setup" data-caption="Proses instalasi yang cepat dan efisien">
+                    <img src="https://wallpapersok.com/images/high/original-void-linux-logo-b1191jmjhcfjapwc.webp" alt="T4n OS Setup">
                     <div class="gallery-overlay">
-                        <h3>Instalasi Void Linux</h3>
-                        <p>Proses setup yang cepat dan efisien</p>
+                        <h3>Installation</h3>
+                        <p>Fast & Efficient</p>
                     </div>
                 </div>
-                <div class="gallery-item" data-title="Void Linux Coding" data-caption="Environment programming yang optimal">
-                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Void Linux Coding">
+                <div class="gallery-item" data-title="T4n OS Coding" data-caption="Environment programming optimal">
+                    <img src="https://wallpapersok.com/images/high/original-void-linux-logo-b1191jmjhcfjapwc.webp" alt="T4n OS Coding">
                     <div class="gallery-overlay">
-                        <h3>Development Environment</h3>
-                        <p>IDE yang powerful untuk development</p>
+                        <h3>Dev Environment</h3>
+                        <p>Optimized Coding</p>
                     </div>
                 </div>
-                <div class="gallery-item" data-title="Void Linux Server" data-caption="Void Linux sebagai server yang andal">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Void Linux Server">
+                <div class="gallery-item" data-title="T4n OS Server" data-caption="Stabilitas server tingkat lanjut">
+                    <img src="https://wallpapersok.com/images/high/original-void-linux-logo-b1191jmjhcfjapwc.webp" alt="T4n OS Server">
                     <div class="gallery-overlay">
-                        <h3>Void Linux Server</h3>
-                        <p>Server yang stabil dan aman</p>
+                        <h3>Server Stability</h3>
+                        <p>Enterprise Ready</p>
                     </div>
                 </div>
-                <div class="gallery-item" data-title="Void Linux Customization" data-caption="Kustomisasi tampilan Void Linux">
-                    <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Void Linux Customization">
+                <div class="gallery-item" data-title="T4n OS Customization" data-caption="Personalisasi tanpa batas">
+                    <img src="https://wallpapersok.com/images/high/original-void-linux-logo-b1191jmjhcfjapwc.webp" alt="T4n OS Customization">
                     <div class="gallery-overlay">
-                        <h3>Kustomisasi</h3>
-                        <p>Tampilan yang dapat disesuaikan</p>
+                        <h3>Rice & Custom</h3>
+                        <p>Limitless Personalization</p>
                     </div>
                 </div>
             </div>
@@ -170,14 +1439,14 @@
 
         <!-- Information Section -->
         <section id="info" class="section">
-            <h2 class="section-title">Informasi & Sumber Daya</h2>
+            <h2 class="section-title"><span>Informasi & Sumber Daya</span></h2>
             <div class="card-container">
                 <div class="card">
                     <div class="card-icon">
                         <i class="fas fa-book"></i>
                     </div>
                     <h3>Dokumentasi</h3>
-                    <p>Dokumentasi lengkap tentang instalasi, konfigurasi, dan penggunaan T4n OS beserta komponen-komponennya.</p>
+                    <p>Panduan lengkap instalasi, konfigurasi, dan optimasi T4n OS untuk mencapai potensi maksimal sistem Anda.</p>
                     <a href="doc/index.html" class="card-link">
                         Baca Dokumentasi <i class="fas fa-arrow-right"></i>
                     </a>
@@ -187,8 +1456,8 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <h3>Komunitas</h3>
-                    <p>Bergabung dengan komunitas T4n OS untuk berdiskusi, berbagi pengalaman, dan mendapatkan bantuan dari pengguna lain.</p>
-                    <a href="#" class="card-link">
+                    <p>Bergabunglah dengan T4n-Company. Diskusi, berbagi konfigurasi (dotfiles), dan kolaborasi teknis.</p>
+                    <a href="https://discord.gg/gqX8XsCpfs" class="card-link">
                         Gabung Komunitas <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -197,52 +1466,56 @@
                         <i class="fas fa-hands-helping"></i>
                     </div>
                     <h3>Kontribusi</h3>
-                    <p>Ikut berkontribusi pada pengembangan T4n OS dengan melaporkan bug, menyarankan fitur, atau mengirimkan pull request.</p>
-                    <a href="#" class="card-link">
+                    <p>Jadilah bagian dari evolusi ini. Laporkan bug, usulkan fitur masa depan, atau kirim Pull Request.</p>
+                    <a href="./contibute.html" class="card-link">
                         Cara Kontribusi <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Download Section -->
+        <!-- Download Section (UPDATED) -->
         <section id="download" class="section">
-            <h2 class="section-title">Unduh T4n OS</h2>
+            <h2 class="section-title"><span>Unduh T4n OS</span></h2>
             <div class="download-content">
                 <div class="download-info">
-                    <h3>Pilih Versi T4n OS</h3>
-                    <p>Tersedia dalam beberapa varian untuk kebutuhan berbeda. Pilih yang sesuai dengan kebutuhan Anda.</p>
+                    <h3>Pilih Edisi Anda</h3>
+                    <p>Tersedia dalam beberapa varian yang disesuaikan untuk kebutuhan spesifik Anda.</p>
                 </div>
                 <div class="download-options">
+                    <!-- 1. BASE EDITION -->
                     <div class="download-card">
                         <div class="download-header">
                             <h4>BASE</h4>
-                            <span class="download-size">1.0 GB</span>
+                            <span class="download-size">1.4 GB</span>
                         </div>
                         <div class="download-body">
-                            <p>Base CLI</p>
+                            <p>Base CLI Only</p>
                             <ul class="download-features">
                                 <li><i class="fas fa-check"></i> Command Line Interface</li>
                                 <li><i class="fas fa-check"></i> init - Runit</li>
                                 <li><i class="fas fa-check"></i> Basic Utilities</li>
+                                <li><i class="fas fa-check"></i> include VUR & VUR-Helper <span class="status-badge status-new">Coming Soon</span></li>
                             </ul>
                         </div>
                         <div class="download-footer">
-                            <button class="btn download-btn" data-version="BASE" data-size="1.0 GB">Get Started</button>
+                            <button class="btn btn-block download-btn" data-version="BASE" data-size="1.4 GB">Download Now</button>
                         </div>
                     </div>
 
+                    <!-- 2. SERVER EDITION -->
                     <div class="download-card">
                         <div class="download-header">
                             <h4>Server <span class="status-badge status-new">COMING SOON</span></h4>
                             <span class="download-size">TBA</span>
                         </div>
                         <div class="download-body">
-                            <p>Server CLI</p>
+                            <p>Server Optimized CLI</p>
                             <ul class="download-features">
                                 <li><i class="fas fa-check"></i> Command Line Interface</li>
                                 <li><i class="fas fa-check"></i> init - SystemD</li>
-                                <li><i class="fas fa-check"></i> Basic Utilities</li>
+                                <li><i class="fas fa-check"></i> Server Hardening Tools</li>
+                                <li><i class="fas fa-check"></i> include VUR & VUR-Helper <span class="status-badge status-new">Coming Soon</span></li>
                             </ul>
                         </div>
                         <div class="download-footer">
@@ -252,18 +1525,20 @@
                         </div>
                     </div>
 
+                    <!-- 3. XFCE4 EDITION -->
                     <div class="download-card">
                         <div class="download-header">
                             <h4>XFCE4 <span class="status-badge status-new">COMING SOON</span></h4>
                             <span class="download-size">TBA</span>
                         </div>
                         <div class="download-body">
-                            <p>Desktop Environment XFCE4</p>
+                            <p>Stable Desktop Environment</p>
                             <ul class="download-features">
-                                <li><i class="fas fa-check"></i> Desktop Environment</li>
-                                <li><i class="fas fa-check"></i> General Application</li>
+                                <li><i class="fas fa-check"></i> XFCE4 Desktop - Customize By T4n-Company</li>
+                                <li><i class="fas fa-check"></i> General App Suite</li>
                                 <li><i class="fas fa-check"></i> init - Runit</li>
-                                <li><i class="fas fa-check"></i> Basic Utilities</li>
+                                <li><i class="fas fa-check"></i> AI-T4n - SLM <span class="status-badge status-new">Coming Soon</span></li>
+                                <li><i class="fas fa-check"></i> include VUR & VUR-Helper <span class="status-badge status-new">Coming Soon</span></li>
                             </ul>
                         </div>
                         <div class="download-footer">
@@ -273,60 +1548,20 @@
                         </div>
                     </div>
             
+                    <!-- 4. KDE EDITION -->
                     <div class="download-card">
                         <div class="download-header">
                             <h4>KDE <span class="status-badge status-new">COMING SOON</span></h4>
                             <span class="download-size">TBA</span>
                         </div>
                         <div class="download-body">
-                            <p>Desktop Environment KDE</p>
+                            <p>Modern Plasma Desktop</p>
                             <ul class="download-features">
-                                <li><i class="fas fa-check"></i> Desktop Environment</li>
-                                <li><i class="fas fa-check"></i> General Application</li>
+                                <li><i class="fas fa-check"></i> KDE Plasma Desktop - Customize By T4n-Company</li>
+                                <li><i class="fas fa-check"></i> General App Suite</li>
                                 <li><i class="fas fa-check"></i> init - Runit</li>
-                                <li><i class="fas fa-check"></i> Basic Utilities</li>
-                            </ul>
-                        </div>
-                        <div class="download-footer">
-                            <button class="btn btn-block btn-disabled" disabled>
-                                <i class="fas fa-clock"></i> Coming Soon
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="download-card">
-                        <div class="download-header">
-                            <h4>BSPWM <span class="status-badge status-new">COMING SOON</span></h4>
-                            <span class="download-size">TBA</span>
-                        </div>
-                        <div class="download-body">
-                            <p>Window Manager BSPWM</p>
-                            <ul class="download-features">
-                                <li><i class="fas fa-check"></i> Window Manager</li>
-                                <li><i class="fas fa-check"></i> General Application</li>
-                                <li><i class="fas fa-check"></i> init - Runit</li>
-                                <li><i class="fas fa-check"></i> Basic Utilities</li>
-                            </ul>
-                        </div>
-                        <div class="download-footer">
-                            <button class="btn btn-block btn-disabled" disabled>
-                                <i class="fas fa-clock"></i> Coming Soon
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="download-card">
-                        <div class="download-header">
-                            <h4>RiverWM <span class="status-badge status-new">COMING SOON</span></h4>
-                            <span class="download-size">TBA</span>
-                        </div>
-                        <div class="download-body">
-                            <p>Window Manager RiverWM</p>
-                            <ul class="download-features">
-                                <li><i class="fas fa-check"></i> Window Manager</li>
-                                <li><i class="fas fa-check"></i> General Application</li>
-                                <li><i class="fas fa-check"></i> init - Runit</li>
-                                <li><i class="fas fa-check"></i> Basic Utilities</li>
+                                <li><i class="fas fa-check"></i> AI-T4n - SLM <span class="status-badge status-new">Coming Soon</span></li>
+                                <li><i class="fas fa-check"></i> include VUR & VUR-Helper <span class="status-badge status-new">Coming Soon</span></li>
                             </ul>
                         </div>
                         <div class="download-footer">
@@ -349,31 +1584,30 @@
                         <img src="assets/images/t4n-os.svg" alt="T4n OS">
                         <h3>T4n OS</h3>
                     </div>
-                    <p>Distribusi Linux berbasis Void Linux dengan fokus pada kustomisasi dan performa.</p>
+                    <p>Definisi ulang distribusi Linux dengan fokus pada estetika, performa absolut, dan kebebasan kustomisasi.</p>
                     <div class="social-links">
                         <a href="https://github.com/t4n-company" target="_blank" aria-label="GitHub Organization"><i class="fab fa-github"></i></a>
                         <a href="https://github.com/gh0st4n" target="_blank" aria-label="GitHub Personal"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="https://www.instagram.com/t4n_company/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://discord.gg/gqX8XsCpfs" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
                         <a href="#" target="_blank" aria-label="Reddit"><i class="fab fa-reddit"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
                     <h3>Sumber Daya</h3>
-                    <ul>
-                        <li><a href="https://github.com/t4n-company/t4n-os" target="_blank">T4n OS</a></li>
-                        <li><a href="https://t4n-company.github.io/t4n-os/doc/index.html" target="_blank">Docs T4n OS</a></li>
-                        <li><a href="https://github.com/t4n-company/VUR" target="_blank">VUR</a></li>
-                        <li><a href="https://github.com/t4n-company/VUR-Helper" target="_blank">VUR-Helper</a></li>
+                    <ul>                        
+                        <li><a href="https://t4n-company.github.io/t4n-os/doc/index.html" target="_blank">Official Docs</a></li>
+                        <li><a href="https://github.com/t4n-company/VUR" target="_blank">VUR Project</a></li>
+                        <li><a href="https://github.com/t4n-company/Let" target="_blank">Let(VUR-Helper)</a></li>
                         <li><a href="https://voidlinux.org/" target="_blank">Void Linux</a></li>
-                        <li><a href="https://docs.voidlinux.org/" target="_blank">Docs Void Linux</a></li>
+                        <li><a href="https://docs.voidlinux.org/" target="_blank">Void Wiki</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Kontribusi</h3>
-                    <p>T4n OS adalah proyek komunitas yang terbuka untuk kontribusi dari siapa saja.</p>
-                    <a href="https://github.com/t4n-company/t4n-os" class="btn btn-small" target="_blank">
-                        <i class="fab fa-github"></i> Kontribusi di GitHub
+                    <p>T4n OS adalah proyek open-source yang terbuka untuk kontribusi dari berbagai para pengembang.</p>
+                    <a href="https://github.com/t4n-company/t4n-os" class="btn btn-small" target="_blank" style="margin: 10px 0 0 0;">
+                        <i class="fab fa-github"></i> Contribute
                     </a>
                 </div>
             </div>
@@ -395,25 +1629,25 @@
                 <h2 class="modal-title">Unduh T4n OS</h2>
                 <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
             </div>
-                <a href="#" target="_blank" class="download-option">
+                <a href="https://drive.google.com/drive/folders/1n46pLVusTyGlu3k04HpDBTO6E1t7j7ud?usp=sharing" target="_blank" class="download-option">
                     <i class="fab fa-google-drive"></i>
                     <div class="download-info">
                         <h3>Google Drive</h3>
-                        <p>Unduh langsung dari Google Drive</p>
+                        <p>High-speed server download</p>
                     </div>
                 </a>
                 <a href="#" target="_blank" class="download-option">
                     <i class="fa-solid fa-download"></i>
                     <div class="download-info">
                         <h3>SourceForge</h3>
-                        <p>Unduh langsung dari SourceForger</p>
+                        <p>Global mirror network</p>
                     </div>
                 </a>
                 <a href="#" target="_blank" class="download-option">
                     <i class="fas fa-magnet"></i>
                     <div class="download-info">
-                        <h3>Torrent <span class="status-badge status-new">COMING SOON</span></h3>
-                        <p>Unduh melalui Torrent</p>
+                        <h3>Torrent <span class="status-badge status-new">SOON</span></h3>
+                        <p>P2P Distributed Download</p>
                     </div>
                 </a>
             </div>
@@ -433,6 +1667,514 @@
         </div>
     </div>
 
-    <script src="assets/script.js"></script>
+    <!-- JavaScript Logic -->
+    <script>
+        /**
+         * Main JavaScript File - T4n OS Website Functionality
+         * Organized and optimized according to web development standards
+         */
+
+        // DOM Elements Cache
+        const DOM = {
+            preloader: document.querySelector('.preloader'),
+            menuToggle: document.getElementById('menu-toggle'),
+            navLinks: document.querySelector('.nav-links'),
+            menuIcon: document.querySelector('#menu-toggle i'),
+            galleryItems: document.querySelectorAll('.gallery-item'),
+            lightbox: document.getElementById('lightbox'),
+            lightboxImage: document.getElementById('lightbox-image'),
+            lightboxCaption: document.getElementById('lightbox-caption'),
+            lightboxClose: document.getElementById('lightbox-close'),
+            lightboxPrev: document.querySelector('.lightbox-prev'),
+            lightboxNext: document.querySelector('.lightbox-next'),
+            downloadModal: document.getElementById('download-modal'),
+            modalClose: document.getElementById('modal-close'),
+            backToTop: document.getElementById('back-to-top')
+        };
+
+        // State Management
+        const AppState = {
+            isMenuOpen: false,
+            isLightboxOpen: false,
+            isModalOpen: false,
+            currentGalleryIndex: 0
+        };
+
+        // Constants
+        const CONSTANTS = {
+            HEADER_HEIGHT: 80,
+            ANIMATION_THRESHOLD: 0.1,
+            ROOT_MARGIN: '0px 0px -50px 0px',
+            TRANSITION_DURATION: 500,
+            PRELOADER_DELAY: 1500
+        };
+
+        // Preloader Manager
+        class PreloaderManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                window.addEventListener('load', () => {
+                    setTimeout(() => {
+                        if (DOM.preloader) {
+                            DOM.preloader.classList.add('fade-out');
+                            setTimeout(() => {
+                                DOM.preloader.style.display = 'none';
+                            }, 800);
+                        }
+                    }, CONSTANTS.PRELOADER_DELAY);
+                });
+            }
+        }
+
+        // Mobile Navigation Manager
+        class NavigationManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                if (DOM.menuToggle) {
+                    DOM.menuToggle.addEventListener('click', () => this.toggleMenu());
+                }
+
+                if (DOM.navLinks) {
+                    DOM.navLinks.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => this.closeMenu());
+                    });
+                }
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && AppState.isMenuOpen) {
+                        this.closeMenu();
+                    }
+                });
+            }
+
+            toggleMenu() {
+                AppState.isMenuOpen = !AppState.isMenuOpen;
+                
+                if (DOM.navLinks) {
+                    DOM.navLinks.classList.toggle('active', AppState.isMenuOpen);
+                }
+                
+                if (DOM.menuIcon) {
+                    DOM.menuIcon.classList.toggle('fa-bars', !AppState.isMenuOpen);
+                    DOM.menuIcon.classList.toggle('fa-times', AppState.isMenuOpen);
+                }
+
+                document.body.style.overflow = AppState.isMenuOpen ? 'hidden' : '';
+            }
+
+            closeMenu() {
+                AppState.isMenuOpen = false;
+                
+                if (DOM.navLinks) {
+                    DOM.navLinks.classList.remove('active');
+                }
+                
+                if (DOM.menuIcon) {
+                    DOM.menuIcon.classList.replace('fa-times', 'fa-bars');
+                }
+                
+                document.body.style.overflow = '';
+            }
+
+            handleResize() {
+                if (window.innerWidth > 768 && AppState.isMenuOpen) {
+                    this.closeMenu();
+                }
+            }
+        }
+
+        // Smooth Scrolling Manager
+        class ScrollManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupSmoothScrolling();
+                this.setupScrollSpy();
+                this.setupBackToTop();
+            }
+
+            setupSmoothScrolling() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        
+                        const targetId = anchor.getAttribute('href');
+                        if (targetId === '#') return;
+                        
+                        this.scrollToElement(targetId);
+                    });
+                });
+            }
+
+            scrollToElement(targetId) {
+                const targetElement = document.querySelector(targetId);
+                if (!targetElement) return;
+
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition - CONSTANTS.HEADER_HEIGHT;
+                const duration = 1000;
+                let startTime = null;
+
+                const animation = (currentTime) => {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    
+                    window.scrollTo(0, startPosition + distance * this.easeInOutQuad(progress));
+                    
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animation);
+                    }
+                };
+
+                requestAnimationFrame(animation);
+            }
+
+            easeInOutQuad(t) {
+                return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            }
+
+            setupScrollSpy() {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+                
+                if (!sections.length || !navLinks.length) return;
+
+                const observerOptions = {
+                    root: null,
+                    rootMargin: `-${CONSTANTS.HEADER_HEIGHT}px 0px 0px 0px`,
+                    threshold: 0.3
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const currentId = entry.target.getAttribute('id');
+                            
+                            navLinks.forEach(link => {
+                                link.classList.toggle(
+                                    'active', 
+                                    link.getAttribute('href') === `#${currentId}`
+                                );
+                            });
+                        }
+                    });
+                }, observerOptions);
+
+                sections.forEach(section => observer.observe(section));
+            }
+
+            setupBackToTop() {
+                if (!DOM.backToTop) return;
+
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        DOM.backToTop.classList.add('show');
+                    } else {
+                        DOM.backToTop.classList.remove('show');
+                    }
+                });
+
+                DOM.backToTop.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        }
+
+        // Animation Manager
+        class AnimationManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupIntersectionObserver();
+                this.setupScrollAnimations();
+            }
+
+            setupIntersectionObserver() {
+                const observerOptions = {
+                    threshold: CONSTANTS.ANIMATION_THRESHOLD,
+                    rootMargin: CONSTANTS.ROOT_MARGIN
+                };
+
+                this.observer = new IntersectionObserver(this.handleIntersection.bind(this), observerOptions);
+                
+                document.querySelectorAll('.card, .gallery-item, .animate-on-scroll').forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                    el.style.transition = `opacity ${CONSTANTS.TRANSITION_DURATION}ms ease, transform ${CONSTANTS.TRANSITION_DURATION}ms ease`;
+                    this.observer.observe(el);
+                });
+            }
+
+            handleIntersection(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        this.observer.unobserve(entry.target);
+                    }
+                });
+            }
+
+            setupScrollAnimations() {
+                window.addEventListener('scroll', this.throttle(() => {
+                    // Add parallax or other scroll effects
+                }, 100));
+            }
+
+            throttle(func, limit) {
+                let inThrottle;
+                return function() {
+                    const args = arguments;
+                    const context = this;
+                    if (!inThrottle) {
+                        func.apply(context, args);
+                        inThrottle = true;
+                        setTimeout(() => inThrottle = false, limit);
+                    }
+                };
+            }
+        }
+
+        // Gallery Lightbox Manager
+        class LightboxManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                if (DOM.galleryItems) {
+                    DOM.galleryItems.forEach((item, index) => {
+                        item.addEventListener('click', () => this.openLightbox(index));
+                    });
+                }
+
+                if (DOM.lightboxClose) {
+                    DOM.lightboxClose.addEventListener('click', () => this.closeLightbox());
+                }
+
+                if (DOM.lightboxPrev) {
+                    DOM.lightboxPrev.addEventListener('click', () => this.previousImage());
+                }
+
+                if (DOM.lightboxNext) {
+                    DOM.lightboxNext.addEventListener('click', () => this.nextImage());
+                }
+
+                if (DOM.lightbox) {
+                    DOM.lightbox.addEventListener('click', (e) => {
+                        if (e.target === DOM.lightbox) {
+                            this.closeLightbox();
+                        }
+                    });
+                }
+
+                document.addEventListener('keydown', (e) => {
+                    if (!AppState.isLightboxOpen) return;
+
+                    switch(e.key) {
+                        case 'Escape':
+                            this.closeLightbox();
+                            break;
+                        case 'ArrowRight':
+                            this.nextImage();
+                            break;
+                        case 'ArrowLeft':
+                            this.previousImage();
+                            break;
+                    }
+                });
+            }
+
+            openLightbox(index) {
+                AppState.isLightboxOpen = true;
+                AppState.currentGalleryIndex = index;
+                
+                const item = DOM.galleryItems[index];
+                const img = item.querySelector('img');
+                const title = item.getAttribute('data-title');
+                const caption = item.getAttribute('data-caption');
+                
+                if (DOM.lightboxImage && img) {
+                    DOM.lightboxImage.src = img.src;
+                    DOM.lightboxImage.alt = img.alt || title || 'Gallery image';
+                }
+                
+                if (DOM.lightboxCaption) {
+                    DOM.lightboxCaption.textContent = caption || title || '';
+                }
+                
+                if (DOM.lightbox) {
+                    DOM.lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            closeLightbox() {
+                AppState.isLightboxOpen = false;
+                
+                if (DOM.lightbox) {
+                    DOM.lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            nextImage() {
+                if (!DOM.galleryItems.length) return;
+                
+                AppState.currentGalleryIndex = 
+                    (AppState.currentGalleryIndex + 1) % DOM.galleryItems.length;
+                this.updateLightboxImage();
+            }
+
+            previousImage() {
+                if (!DOM.galleryItems.length) return;
+                
+                AppState.currentGalleryIndex = 
+                    (AppState.currentGalleryIndex - 1 + DOM.galleryItems.length) % DOM.galleryItems.length;
+                this.updateLightboxImage();
+            }
+
+            updateLightboxImage() {
+                const item = DOM.galleryItems[AppState.currentGalleryIndex];
+                const img = item.querySelector('img');
+                const title = item.getAttribute('data-title');
+                const caption = item.getAttribute('data-caption');
+                
+                if (DOM.lightboxImage && img) {
+                    DOM.lightboxImage.src = img.src;
+                    DOM.lightboxImage.alt = img.alt || title || 'Gallery image';
+                }
+                
+                if (DOM.lightboxCaption) {
+                    DOM.lightboxCaption.textContent = caption || title || '';
+                }
+            }
+        }
+
+        // Modal Manager
+        class ModalManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+            }
+
+            setupEventListeners() {
+                const downloadBtns = document.querySelectorAll('.download-btn');
+                
+                downloadBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const version = btn.getAttribute('data-version');
+                        const size = btn.getAttribute('data-size');
+                        this.openModal(version, size);
+                    });
+                });
+
+                if (DOM.modalClose) {
+                    DOM.modalClose.addEventListener('click', () => this.closeModal());
+                }
+
+                if (DOM.downloadModal) {
+                    DOM.downloadModal.addEventListener('click', (e) => {
+                        if (e.target === DOM.downloadModal) {
+                            this.closeModal();
+                        }
+                    });
+                }
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && AppState.isModalOpen) {
+                        this.closeModal();
+                    }
+                });
+            }
+
+            openModal(version, size) {
+                AppState.isModalOpen = true;
+                
+                const modalTitle = document.querySelector('.modal-title');
+                if (modalTitle) {
+                    modalTitle.textContent = `Unduh T4n OS - ${version}`;
+                }
+                
+                this.updateDownloadOptions(version);
+                
+                if (DOM.downloadModal) {
+                    DOM.downloadModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            updateDownloadOptions(version) {
+                const downloadOptions = document.querySelector('.modal-download-options');
+                if (!downloadOptions) return;
+                
+                const firstOption = downloadOptions.querySelector('.download-info h3');
+                if (firstOption) {
+                    firstOption.textContent = `T4n OS ${version}`;
+                }
+            }
+
+            closeModal() {
+                AppState.isModalOpen = false;
+                
+                if (DOM.downloadModal) {
+                    DOM.downloadModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+
+        // Initialize Application
+        class App {
+            constructor() {
+                this.preloader = new PreloaderManager();
+                this.navigation = new NavigationManager();
+                this.scrollManager = new ScrollManager();
+                this.animation = new AnimationManager();
+                this.lightbox = new LightboxManager();
+                this.modal = new ModalManager();
+                
+                this.setupGlobalEventListeners();
+            }
+
+            setupGlobalEventListeners() {
+                window.addEventListener('resize', () => {
+                    this.navigation.handleResize();
+                });
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => new App());
+        } else {
+            new App();
+        }
+    </script>
 </body>
 </html>
