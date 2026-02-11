@@ -5,24 +5,18 @@
 ## 🎯 Tujuan
 
 - Menjadi OS:
+  - Minimalis
+  - Cepat
   - Ringan
-  - Modular
-  - Fleksibel
 - User bebas memilih:
   - `runit` **atau**
-  - `systemd`
-- Use Case
-  - Power User
-  - Server (*on going*) 
-  - General Desktop (*on going*) 
-  - Workstation (*on going*) 
-  - Gaming (*on going*)
+  - `systemd` (Experiment - Rekomendasi : Server)
 - Variant
   - Base
   - Server (on Going)
   - XFCE4 (on Going)
   - BSPWM (on Going)
-  - KDE (on Going)
+  - KDE / Cosmic DE (on Going)
   - RiverWM (on Going)
  
 ## 🧠 Filosofi
@@ -39,15 +33,13 @@
   - Package eksperimental
   - Package Lainnya
 
-## 🛠 VUR-Helper : T4n
+## 🛠 VUR-Helper : Let
 
 Helper resmi untuk VUR.
 
 Fungsi:
-- Build & install package VUR
-- Remove & update
-- Inspect dependency
-- Cross-build (*on going*)
+- Search
+- Clone
 
 ## 🧪 Status Proyek
 - 🟡 Development
